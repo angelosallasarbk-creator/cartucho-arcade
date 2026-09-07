@@ -95,6 +95,60 @@
     .hud .status { width: 100%; order: 3; font-size: 13px; }
     .hud button { padding: 8px 12px; font-size: 13px; }
   }
+
+  /* ---- painel de jogos ---- */
+  .games { position: fixed; inset: 0; z-index: 30; display: none; align-items: center; justify-content: center; background: rgba(6,7,18,0.82); padding: 20px; }
+  .games.open { display: flex; }
+  .games-box { width: min(920px, 100%); }
+  .games-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px; }
+  .games-head h2 { font-family: "Press Start 2P", monospace; font-size: 14px; font-weight: 400; margin: 0; }
+  .games-head button { background: none; border: 1px solid var(--line); color: var(--ink); border-radius: 999px; padding: 6px 14px; font-family: "Chakra Petch", sans-serif; font-size: 14px; cursor: pointer; }
+  .cart-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+  .cart { border: 1px solid var(--line); border-radius: 12px; padding: 18px; background: rgba(11,13,31,0.9); display: flex; flex-direction: column; gap: 8px; min-height: 150px; }
+  .cart .tag { font-family: "Press Start 2P", monospace; font-size: 9px; color: var(--coin); }
+  .cart h3 { margin: 0; font-size: 18px; font-weight: 600; }
+  .cart p { margin: 0; color: var(--ink-muted); font-size: 14px; line-height: 1.5; flex: 1; }
+  .cart button { align-self: flex-start; margin-top: 6px; }
+  .cart.soon { opacity: 0.55; }
+  .cart.soon button { cursor: default; }
+
+  /* ---- tela do pião ---- */
+  #piao { position: fixed; inset: 0; z-index: 40; display: none; background: var(--bg); }
+  #piao.open { display: block; }
+  #piao-scene { position: absolute; inset: 0; touch-action: none; -webkit-user-select: none; user-select: none; }
+  #piao-scene canvas { display: block; }
+  .piao-top { position: absolute; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; padding-top: calc(18px + env(safe-area-inset-top)); pointer-events: none; }
+  .piao-top > * { pointer-events: auto; }
+  .piao-top .name { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-muted); }
+  .piao-top input { background: rgba(11,13,31,0.7); border: 1px solid var(--line); color: var(--ink); border-radius: 8px; padding: 8px 10px; font-family: "Chakra Petch", sans-serif; font-size: 14px; width: 150px; }
+  .piao-hud { position: absolute; left: 24px; bottom: calc(24px + env(safe-area-inset-bottom)); max-width: 380px; pointer-events: none; }
+  .piao-hud > * { pointer-events: auto; }
+  .piao-hud .phase { font-family: "Press Start 2P", monospace; font-size: 11px; color: var(--coin); margin: 0 0 10px; }
+  .piao-hud .msg { font-size: 17px; line-height: 1.5; margin: 0 0 14px; }
+  .piao-hud .nums { display: flex; gap: 22px; margin-bottom: 14px; font-family: "Press Start 2P", monospace; font-size: 13px; }
+  .piao-hud .nums small { display: block; font-family: "Chakra Petch", sans-serif; font-size: 12px; color: var(--ink-muted); margin-bottom: 6px; font-weight: 500; }
+  .piao-hud .row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .piao-hud button { font-family: "Chakra Petch", sans-serif; font-size: 14px; font-weight: 600; border-radius: 8px; padding: 10px 16px; cursor: pointer; border: 1px solid var(--line); background: rgba(11,13,31,0.7); color: var(--ink); }
+  .piao-hud button.coin { background: var(--coin); color: var(--coin-ink); border-color: transparent; }
+  .piao-hud button:focus-visible { outline: 2px solid var(--coin); outline-offset: 2px; }
+  .bar { height: 6px; border-radius: 3px; background: rgba(239,233,220,0.12); overflow: hidden; margin-bottom: 14px; width: 260px; max-width: 100%; }
+  .bar i { display: block; height: 100%; width: 0; background: var(--coin); }
+  .rank { position: absolute; right: 24px; bottom: calc(24px + env(safe-area-inset-bottom)); width: 240px; background: rgba(11,13,31,0.75); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+  .rank h3 { font-family: "Press Start 2P", monospace; font-size: 10px; font-weight: 400; margin: 0 0 10px; color: var(--coin); }
+  .rank ol { margin: 0; padding: 0; list-style: none; font-size: 14px; }
+  .rank li { display: flex; justify-content: space-between; padding: 4px 0; border-top: 1px solid var(--line); gap: 8px; }
+  .rank li:first-child { border-top: 0; }
+  .rank li span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .rank li.me { color: var(--coin); }
+  .rank .empty { color: var(--ink-muted); font-size: 13px; }
+  @media (max-width: 900px) {
+    .piao-top { padding: 12px 14px; padding-top: calc(12px + env(safe-area-inset-top)); }
+    .piao-top input { width: 120px; }
+    .piao-hud { left: 14px; right: 14px; max-width: none; bottom: calc(14px + env(safe-area-inset-bottom)); }
+    .piao-hud .msg { font-size: 15px; }
+    .rank { display: none; }
+    .rank.show { display: block; position: fixed; left: 14px; right: 14px; width: auto; bottom: auto; top: 70px; }
+  }
 </style>
 </head>
 <body>
@@ -104,7 +158,7 @@
 <header>
   <a class="logo" href="#">CAR<span>TU</span>CHO</a>
   <nav>
-    <a href="#">Jogos</a>
+    <a href="#" id="navGames">Jogos</a>
     <a href="#">Novidades</a>
     <a href="#">Ranking</a>
   </nav>
@@ -116,7 +170,7 @@
   <h1 class="reveal">Gire o cubo.<br>Entre no arcade.</h1>
   <p class="sub reveal">Clássicos de fliperama e console, restaurados pixel por pixel para jogar direto no navegador. Sem instalar nada, sem esperar.</p>
   <div class="actions reveal">
-    <a class="btn btn-coin" href="#">Jogar agora</a>
+    <a class="btn btn-coin" href="#" id="ctaPlay">Jogar agora</a>
     <a class="btn btn-ghost" href="#">Ver catálogo</a>
   </div>
 </section>
@@ -132,6 +186,46 @@
     <button id="resetBtn" type="button">Resetar</button>
   </div>
 </div>
+
+
+<div class="games" id="games" role="dialog" aria-label="Escolha um jogo">
+  <div class="games-box">
+    <div class="games-head"><h2>Escolha um cartucho</h2><button type="button" id="gamesClose">Fechar</button></div>
+    <div class="cart-grid">
+      <div class="cart"><span class="tag">Na tela</span><h3>Cubo mágico</h3><p>Gire as camadas e resolva o cubo contra o relógio.</p><button class="btn btn-ghost" type="button" id="gamesCube">Continuar</button></div>
+      <div class="cart"><span class="tag">Novo</span><h3>Pião</h3><p>Enrole a corda o mais rápido que puder, lance com força e veja quanto tempo ele roda.</p><button class="btn btn-coin" type="button" id="gamesPiao">Jogar</button></div>
+      <div class="cart soon"><span class="tag">Em breve</span><h3>Bolinha de gude</h3><p>Mire, dê o peteleco e tire as bolinhas do círculo.</p><button class="btn btn-ghost" type="button" disabled>Em breve</button></div>
+      <div class="cart soon"><span class="tag">Em breve</span><h3>Peteca</h3><p>Mantenha a peteca no ar o máximo de tempo.</p><button class="btn btn-ghost" type="button" disabled>Em breve</button></div>
+    </div>
+  </div>
+</div>
+
+<section id="piao" aria-label="Pião">
+  <div id="piao-scene"></div>
+  <div class="piao-top">
+    <button class="enter" type="button" id="piaoBack" style="background:rgba(11,13,31,0.7);cursor:pointer;font-family:inherit">← Voltar</button>
+    <label class="name">Jogador <input id="piaoName" maxlength="16" placeholder="Seu nome"></label>
+    <button class="enter" type="button" id="piaoRankBtn" style="background:rgba(11,13,31,0.7);cursor:pointer;font-family:inherit">Ranking</button>
+  </div>
+  <div class="piao-hud">
+    <p class="phase" id="piaoPhase">Pião</p>
+    <p class="msg" id="piaoMsg">Enrole a corda, lance com força e deixe o pião rodar. Quem rodar mais tempo lidera o ranking.</p>
+    <div class="bar" id="piaoBar"><i></i></div>
+    <div class="nums">
+      <div><small>Voltas</small><span id="piaoWraps">0</span></div>
+      <div><small>Rodando</small><span id="piaoTime">0,0 s</span></div>
+      <div><small>Melhor</small><span id="piaoBest">—</span></div>
+    </div>
+    <div class="row">
+      <button class="coin" type="button" id="piaoStart">Começar</button>
+      <button type="button" id="piaoHow">Como amarrar a corda</button>
+      <button type="button" id="piaoLaunchBtn" style="display:none">Lançar agora</button>
+      <button class="coin" type="button" id="piaoNext" style="display:none">Próximo</button>
+      <button type="button" id="piaoSkip" style="display:none">Pular</button>
+    </div>
+  </div>
+  <aside class="rank" id="piaoRank"><h3>Ranking</h3><ol id="piaoRankList"></ol></aside>
+</section>
 
 <script>
 /**
@@ -570,8 +664,10 @@ document.getElementById("resetBtn").addEventListener("click", () => {
 
 // --- render loop ---
 const clock = new THREE.Clock();
+let cubePaused = false;
 function animate() {
   requestAnimationFrame(animate);
+  if (cubePaused) return;
   const t = clock.getElapsedTime();
   const idle = performance.now() - lastInteraction > 2500;
   if (idle && dragMode !== "orbit") cubeRoot.rotateOnWorldAxis(AXIS_VEC.y, 0.0028);
@@ -603,6 +699,456 @@ window.addEventListener("orientationchange", () => setTimeout(onResize, 200));
 if (window.ResizeObserver) new ResizeObserver(() => onResize()).observe(mount);
 setTimeout(onResize, 300);
 setTimeout(onResize, 1200);
+
+// =====================================================================
+//  Painel de jogos
+// =====================================================================
+const gamesEl = document.getElementById("games");
+function openGames(e) { if (e) e.preventDefault(); gamesEl.classList.add("open"); }
+function closeGames() { gamesEl.classList.remove("open"); }
+document.getElementById("ctaPlay").addEventListener("click", openGames);
+document.getElementById("navGames").addEventListener("click", openGames);
+document.getElementById("gamesClose").addEventListener("click", closeGames);
+document.getElementById("gamesCube").addEventListener("click", closeGames);
+document.getElementById("gamesPiao").addEventListener("click", () => { closeGames(); Piao.open(); });
+
+// =====================================================================
+//  Pião
+// =====================================================================
+const Piao = (() => {
+  const el = {
+    root: document.getElementById("piao"), mount: document.getElementById("piao-scene"),
+    phase: document.getElementById("piaoPhase"), msg: document.getElementById("piaoMsg"),
+    bar: document.querySelector("#piaoBar i"), wraps: document.getElementById("piaoWraps"),
+    time: document.getElementById("piaoTime"), best: document.getElementById("piaoBest"),
+    start: document.getElementById("piaoStart"), launchBtn: document.getElementById("piaoLaunchBtn"),
+    back: document.getElementById("piaoBack"), name: document.getElementById("piaoName"),
+    rank: document.getElementById("piaoRank"), rankList: document.getElementById("piaoRankList"),
+    rankBtn: document.getElementById("piaoRankBtn"),
+    how: document.getElementById("piaoHow"), next: document.getElementById("piaoNext"), skip: document.getElementById("piaoSkip"),
+  };
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (_) { return d; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} },
+  };
+  const WIND_SECONDS = 6, MAX_WRAPS = 16;
+  let built = false, active = false, raf = 0;
+  let scene, camera, renderer, w, h, clock;
+  let topGroup, spinGroup, ringsGroup, shadow, ringRadiusAt, ropeLoop, ropeTail, bodySamples = [];
+  const _tmpV = new THREE.Vector3(), _tmpQ = new THREE.Quaternion();
+  let tutStep = 0, tutTimer = 0;
+  let state = "idle";
+  let wraps = 0, windAngle = 0, windStart = 0, lastAngle = null, pointerDown = false;
+  let samples = [];
+  let spinStart = 0, spinDuration = 0, spinT = 0, precession = 0, fallT = 0, launchAnim = null;
+  let rank = store.get("cartucho_piao_rank", []);
+  let lastResult = null;
+  el.name.value = store.get("cartucho_piao_name", "");
+  el.name.addEventListener("change", () => store.set("cartucho_piao_name", el.name.value.trim()));
+
+  function playerName() { return (el.name.value.trim() || "Jogador").slice(0, 16); }
+  function fmt(sec) { return sec.toFixed(1).replace(".", ",") + " s"; }
+
+  function renderRank() {
+    rank.sort((a, b) => b.time - a.time);
+    rank = rank.slice(0, 10);
+    store.set("cartucho_piao_rank", rank);
+    el.rankList.innerHTML = "";
+    if (!rank.length) { el.rankList.innerHTML = '<li class="empty">Ninguém ainda. Seja o primeiro.</li>'; }
+    rank.forEach((r, i) => {
+      const li = document.createElement("li");
+      if (lastResult && r === lastResult) li.className = "me";
+      li.innerHTML = "<span>" + (i + 1) + ". " + r.name.replace(/[<>&]/g, "") + "</span><span>" + fmt(r.time) + "</span>";
+      el.rankList.appendChild(li);
+    });
+    const mine = rank.filter((r) => r.name === playerName());
+    el.best.textContent = mine.length ? fmt(mine[0].time) : "—";
+  }
+
+  function woodTexture() {
+    const c = document.createElement("canvas");
+    c.width = 128; c.height = 512;
+    const g = c.getContext("2d");
+    const grad = g.createLinearGradient(0, 0, 0, 512);
+    grad.addColorStop(0, "#e7a877"); grad.addColorStop(0.5, "#d98f5c"); grad.addColorStop(1, "#c77843");
+    g.fillStyle = grad; g.fillRect(0, 0, 128, 512);
+    g.globalAlpha = 0.18; g.fillStyle = "#8a4a22";
+    for (let i = 0; i < 60; i++) { const y = Math.random() * 512; g.fillRect(0, y, 128, 1 + Math.random() * 2); }
+    g.globalAlpha = 1; g.fillStyle = "#4a2a14";
+    [0.19, 0.25, 0.31].forEach((v) => { const y = (1 - v) * 512; g.fillRect(0, y - 4, 128, 8); });
+    g.fillStyle = "#b86f3c"; g.fillRect(0, 0, 128, 14);
+    const t = new THREE.CanvasTexture(c);
+    t.encoding = THREE.sRGBEncoding;
+    return t;
+  }
+
+
+  function stoneTexture() {
+    const c = document.createElement("canvas");
+    c.width = 512; c.height = 512;
+    const g = c.getContext("2d");
+    g.fillStyle = "#3a3733"; g.fillRect(0, 0, 512, 512);
+    const cw = 64, ch = 42;
+    for (let row = 0; row < 512 / ch + 1; row++) {
+      const off = (row % 2) * cw / 2;
+      for (let col = -1; col < 512 / cw + 1; col++) {
+        const x = col * cw + off, y = row * ch;
+        const l = 78 + Math.random() * 40;
+        g.fillStyle = "rgb(" + (l + 8) + "," + (l + 4) + "," + l + ")";
+        g.beginPath();
+        const r = 6;
+        g.moveTo(x + r + 3, y + 3); g.lineTo(x + cw - r - 3, y + 3); g.quadraticCurveTo(x + cw - 3, y + 3, x + cw - 3, y + r + 3);
+        g.lineTo(x + cw - 3, y + ch - r - 3); g.quadraticCurveTo(x + cw - 3, y + ch - 3, x + cw - r - 3, y + ch - 3);
+        g.lineTo(x + r + 3, y + ch - 3); g.quadraticCurveTo(x + 3, y + ch - 3, x + 3, y + ch - r - 3);
+        g.lineTo(x + 3, y + r + 3); g.quadraticCurveTo(x + 3, y + 3, x + r + 3, y + 3); g.fill();
+        g.fillStyle = "rgba(255,255,255,0.06)"; g.fillRect(x + 6, y + 6, cw - 12, 4);
+      }
+    }
+    const t = new THREE.CanvasTexture(c);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(6, 6); t.encoding = THREE.sRGBEncoding;
+    return t;
+  }
+  function buildStreet() {
+    const g = new THREE.Group();
+    const stone = new THREE.MeshStandardMaterial({ map: stoneTexture(), roughness: 0.95 });
+    const sidewalk = new THREE.Mesh(new THREE.PlaneGeometry(24, 14), stone);
+    sidewalk.rotation.x = -Math.PI / 2; sidewalk.position.z = 1; g.add(sidewalk);
+    const curb = new THREE.Mesh(new THREE.BoxGeometry(24, 0.18, 0.5), new THREE.MeshStandardMaterial({ color: new THREE.Color(0x8d8a82).convertSRGBToLinear(), roughness: 0.9 }));
+    curb.position.set(0, -0.09, -6.2); g.add(curb);
+    const asphalt = new THREE.Mesh(new THREE.PlaneGeometry(24, 10), new THREE.MeshStandardMaterial({ color: new THREE.Color(0x22242c).convertSRGBToLinear(), roughness: 1 }));
+    asphalt.rotation.x = -Math.PI / 2; asphalt.position.set(0, -0.18, -11.4); g.add(asphalt);
+    const chalk = new THREE.Mesh(new THREE.RingGeometry(1.35, 1.42, 80), new THREE.MeshBasicMaterial({ color: 0xf0e9d8, transparent: true, opacity: 0.55 }));
+    chalk.rotation.x = -Math.PI / 2; chalk.position.y = 0.003; g.add(chalk);
+    const houseCols = [0xd96d4f, 0x4a8fd8, 0xe8c25a, 0x5cb07a, 0xc95fa0, 0xe09a48];
+    for (let i = 0; i < 6; i++) {
+      const hgt = 3.2 + (i % 3) * 0.7;
+      const house = new THREE.Mesh(new THREE.BoxGeometry(3.6, hgt, 3), new THREE.MeshStandardMaterial({ color: new THREE.Color(houseCols[i]).convertSRGBToLinear(), roughness: 0.9 }));
+      house.position.set(-9.5 + i * 3.8, hgt / 2 - 0.18, -18.5); g.add(house);
+      for (let wnd = 0; wnd < 2; wnd++) {
+        const win = new THREE.Mesh(new THREE.PlaneGeometry(0.7, 0.9), new THREE.MeshBasicMaterial({ color: 0xffe3a3 }));
+        win.position.set(house.position.x - 0.9 + wnd * 1.8, 1.6, -16.99); g.add(win);
+      }
+    }
+    const post = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.08, 4.6, 10), new THREE.MeshStandardMaterial({ color: 0x2a2d35, metalness: 0.6, roughness: 0.5 }));
+    post.position.set(4.6, 2.2, -5.6); g.add(post);
+    const lampHead = new THREE.Mesh(new THREE.SphereGeometry(0.22, 14, 14), new THREE.MeshBasicMaterial({ color: 0xffd98a }));
+    lampHead.position.set(4.6, 4.55, -5.6); g.add(lampHead);
+    const lamp = new THREE.PointLight(0xffc873, 1.4, 14, 2); lamp.position.set(4.6, 4.4, -5.6); g.add(lamp);
+    return g;
+  }
+
+  function build() {
+    built = true;
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0b0d1f);
+    scene.fog = new THREE.Fog(0x0b0d1f, 16, 34);
+    camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+    camera.position.set(0, 3.4, 7.6);
+    camera.lookAt(0, 0.9, 0);
+    renderer = new THREE.WebGLRenderer({ antialias: !isMobileUA });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobileUA ? 1.5 : 2));
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    el.mount.appendChild(renderer.domElement);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+    const keyL = new THREE.DirectionalLight(0xfff0d8, 1.1); keyL.position.set(4, 8, 5); scene.add(keyL);
+    const rA = new THREE.PointLight(0xff4fd8, 1.2, 30); rA.position.set(-7, 3, 2); scene.add(rA);
+    const rB = new THREE.PointLight(0x3fd6ff, 1.0, 30); rB.position.set(7, 2, 3); scene.add(rB);
+
+    scene.add(buildStreet());
+    shadow = new THREE.Mesh(new THREE.CircleGeometry(0.7, 40), new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.45, depthWrite: false }));
+    shadow.rotation.x = -Math.PI / 2; shadow.position.y = 0.004; scene.add(shadow);
+
+    const profile = [[0,0],[0.05,0.04],[0.16,0.32],[0.36,0.7],[0.56,1.0],[0.7,1.3],[0.72,1.55],[0.64,1.8],[0.46,2.0],[0.33,2.1],[0.27,2.2],[0.3,2.3],[0.2,2.34],[0,2.34]];
+    const pts = profile.map((p) => new THREE.Vector2(p[0], p[1]));
+    bodySamples = [];
+    profile.forEach(([r, y]) => { for (let k = 0; k < 8; k++) { const a = k * Math.PI / 4; bodySamples.push(new THREE.Vector3(r * Math.cos(a), y, r * Math.sin(a))); } });
+    ringRadiusAt = (y) => {
+      for (let i = 1; i < profile.length; i++) if (profile[i][1] >= y) {
+        const [x0, y0] = profile[i - 1], [x1, y1] = profile[i];
+        return x0 + (x1 - x0) * ((y - y0) / (y1 - y0 || 1));
+      }
+      return 0.3;
+    };
+    const body = new THREE.Mesh(new THREE.LatheGeometry(pts, 48), new THREE.MeshStandardMaterial({ map: woodTexture(), roughness: 0.55, metalness: 0.05 }));
+    const tip = new THREE.Mesh(new THREE.SphereGeometry(0.07, 16, 16), new THREE.MeshStandardMaterial({ color: 0xbfc4cc, metalness: 0.9, roughness: 0.25 }));
+    tip.position.y = 0.03;
+    topGroup = new THREE.Group(); spinGroup = new THREE.Group(); ringsGroup = new THREE.Group();
+    spinGroup.add(body, tip, ringsGroup);
+    topGroup.add(spinGroup);
+    const ropeMat = new THREE.MeshStandardMaterial({ color: new THREE.Color(0xd9b78a).convertSRGBToLinear(), roughness: 0.8 });
+    ropeLoop = new THREE.Mesh(new THREE.TorusGeometry(0.11, 0.028, 6, 24), ropeMat);
+    ropeLoop.rotation.x = Math.PI / 2; ropeLoop.position.y = 0.1; ropeLoop.visible = false; spinGroup.add(ropeLoop);
+    const tailCurve = new THREE.CatmullRomCurve3([new THREE.Vector3(0.55, 1.05, 0.2), new THREE.Vector3(1.4, 1.5, 0.5), new THREE.Vector3(2.4, 2.4, 0.9), new THREE.Vector3(3.4, 3.6, 1.2)]);
+    ropeTail = new THREE.Mesh(new THREE.TubeGeometry(tailCurve, 40, 0.028, 6, false), ropeMat);
+    ropeTail.visible = false; topGroup.add(ropeTail);
+    const knot = new THREE.Mesh(new THREE.SphereGeometry(0.075, 10, 10), ropeMat);
+    knot.position.set(3.4, 3.6, 1.2); ropeTail.add(knot);
+    ropeTail.userData.knot = knot;
+    scene.add(topGroup);
+    clock = new THREE.Clock();
+
+    el.mount.addEventListener("pointerdown", onDown);
+    el.mount.addEventListener("pointermove", onMove);
+    el.mount.addEventListener("pointerup", onUp);
+    el.mount.addEventListener("pointercancel", onUp);
+    window.addEventListener("resize", resize);
+  }
+
+  function resize() {
+    if (!built) return;
+    const r = el.mount.getBoundingClientRect();
+    w = r.width || window.innerWidth; h = r.height || window.innerHeight;
+    if (h < 300) { h = Math.max(560, Math.round((window.screen ? window.screen.height : 700) * 0.75)); el.mount.style.height = h + "px"; }
+    camera.aspect = w / h; camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+    camera.position.set(0, 3.4, w < h ? 9.4 : 7.6);
+    camera.lookAt(0, 0.9, 0);
+  }
+
+  // ---------- fases ----------
+  function setHud(phase, msg) { el.phase.textContent = phase; el.msg.textContent = msg; }
+  function setRings(n) {
+    while (ringsGroup.children.length > n) ringsGroup.remove(ringsGroup.children[ringsGroup.children.length - 1]);
+    while (ringsGroup.children.length < n) {
+      const i = ringsGroup.children.length;
+      const y = 0.34 + i * 0.05;
+      const ring = new THREE.Mesh(new THREE.TorusGeometry(ringRadiusAt(y) + 0.03, 0.028, 6, 28), new THREE.MeshStandardMaterial({ color: new THREE.Color(0xd9b78a).convertSRGBToLinear(), roughness: 0.8 }));
+      ring.rotation.x = Math.PI / 2; ring.position.y = y;
+      ring.rotation.z = i * 0.4;
+      ringsGroup.add(ring);
+    }
+  }
+  function poseHeld() {
+    topGroup.position.set(0, 1.5, 0);
+    topGroup.rotation.set(0, 0, 0.95);
+    spinGroup.rotation.set(0, 0, 0);
+  }
+
+  function reset() {
+    state = "idle"; wraps = 0; windAngle = 0; lastAngle = null; samples = []; launchAnim = null; spinT = 0; fallT = 0;
+    setRings(0); poseHeld();
+    el.wraps.textContent = "0"; el.time.textContent = "0,0 s"; el.bar.style.width = "0%";
+    el.launchBtn.style.display = "none"; el.next.style.display = "none"; el.skip.style.display = "none";
+    ropeLoop.visible = false; ropeTail.visible = false;
+    el.start.textContent = "Começar"; el.start.style.display = ""; el.how.style.display = "";
+    setHud("Pião", "Enrole a corda, lance com força e deixe o pião rodar. Quem rodar mais tempo lidera o ranking.");
+  }
+  function startWind() {
+    state = "wind"; wraps = 0; windAngle = 0; lastAngle = null; windStart = 0;
+    setRings(0); poseHeld();
+    ropeLoop.visible = true; ropeTail.visible = false;
+    el.start.style.display = "none"; el.how.style.display = "none"; el.launchBtn.style.display = "";
+    el.wraps.textContent = "0"; el.bar.style.width = "0%";
+    setHud("Fase 1 — Enrolar", "Faça círculos com o dedo (ou o mouse) ao redor do pião. Você tem " + WIND_SECONDS + " segundos a partir do primeiro movimento.");
+    blip(440);
+  }
+  function startLaunch() {
+    state = "launch"; samples = [];
+    el.launchBtn.style.display = "none";
+    setHud("Fase 2 — Lançar", wraps + " volta" + (wraps === 1 ? "" : "s") + " de corda. Agora arraste rápido para baixo, na diagonal, e solte para lançar!");
+    blip(560);
+  }
+  function doLaunch(speed, angleFactor) {
+    const speedQ = Math.max(0, Math.min(1, (speed - 0.35) / 2.2));
+    spinDuration = 1.5 + wraps * 1.15 * (0.45 + 0.55 * speedQ) * angleFactor + Math.random() * 0.8;
+    state = "launching";
+    launchAnim = { t: 0, from: topGroup.position.clone(), rz: topGroup.rotation.z };
+    setHud("Fase 3 — Rodando", speedQ > 0.75 ? "Lançamento perfeito!" : speedQ > 0.4 ? "Bom lançamento." : "Lançou fraco... mas vai rodar.");
+    blip(700); setTimeout(() => blip(900), 90);
+  }
+  function finish(sec) {
+    state = "done";
+    lastResult = { name: playerName(), time: Math.round(sec * 10) / 10, date: Date.now() };
+    rank.push(lastResult);
+    renderRank();
+    const pos = rank.indexOf(lastResult);
+    const msg = "O pião rodou por " + fmt(sec) + "." + (pos === 0 ? " Novo recorde do ranking!" : pos >= 0 ? " Você ficou em " + (pos + 1) + "º lugar." : " Não entrou no top 10 desta vez.");
+    setHud("Resultado", msg);
+    el.start.textContent = "Jogar de novo"; el.start.style.display = ""; el.how.style.display = "";
+    if (w < 900) el.rank.classList.add("show");
+    blip(pos === 0 ? 1320 : 660);
+  }
+
+
+  // ---------- tutorial: como amarrar a corda ----------
+  const TUT = [
+    { phase: "Como amarrar — 1 de 4", msg: "Faça um nó na ponta da corda e prenda esse laço no ferrão, a ponta de metal do pião. É por aqui que a corda começa.",
+      show: () => { setRings(0); ropeLoop.visible = true; ropeTail.visible = false; } },
+    { phase: "Como amarrar — 2 de 4", msg: "Enrole a corda bem apertada, de baixo para cima, com as voltas encostadas uma na outra. Quanto mais voltas, mais tempo o pião roda.",
+      show: () => { ropeLoop.visible = true; ropeTail.visible = false; tutTimer = 0; } },
+    { phase: "Como amarrar — 3 de 4", msg: "Deixe sobrar a ponta com um nó ou um botão e segure-a entre os dedos. Segure o pião com a ponta de metal virada para o chão.",
+      show: () => { setRings(12); ropeLoop.visible = true; ropeTail.visible = true; } },
+    { phase: "Como amarrar — 4 de 4", msg: "Lance o pião para o chão com um movimento rápido do braço e, ao mesmo tempo, puxe a corda de volta. A corda desenrola, ele gira e cai de pé. Agora é a sua vez: no jogo, faça círculos para enrolar e arraste rápido para lançar.",
+      show: () => { setRings(12); ropeLoop.visible = true; ropeTail.visible = true; } },
+  ];
+  function startTutorial() {
+    state = "tutorial"; tutStep = 0;
+    poseHeld();
+    el.start.style.display = "none"; el.how.style.display = "none"; el.launchBtn.style.display = "none";
+    el.next.style.display = ""; el.skip.style.display = "";
+    el.bar.style.width = "0%";
+    showTut();
+    blip(500);
+  }
+  function showTut() {
+    const t = TUT[tutStep];
+    setHud(t.phase, t.msg);
+    t.show();
+    el.next.textContent = tutStep === TUT.length - 1 ? "Entendi, começar" : "Próximo";
+  }
+  function endTutorial() {
+    ropeLoop.visible = false; ropeTail.visible = false;
+    el.next.style.display = "none"; el.skip.style.display = "none";
+    store.set("cartucho_piao_tut", 1);
+    startWind();
+  }
+  el.next.addEventListener("click", () => { if (tutStep < TUT.length - 1) { tutStep++; showTut(); blip(520); } else endTutorial(); });
+  el.skip.addEventListener("click", endTutorial);
+  el.how.addEventListener("click", startTutorial);
+
+  // ---------- entrada ----------
+  function topScreenCenter() {
+    const v = new THREE.Vector3(0, 0.9, 0).applyMatrix4(topGroup.matrixWorld).project(camera);
+    return { x: (v.x + 1) / 2 * w, y: (1 - v.y) / 2 * h };
+  }
+  function onDown(e) {
+    if (!e.isPrimary) return;
+    pointerDown = true;
+    if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+    if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (_) {} }
+    if (state === "wind") lastAngle = null;
+    if (state === "launch") samples = [{ x: e.clientX, y: e.clientY, t: performance.now() }];
+    try { el.mount.setPointerCapture(e.pointerId); } catch (_) {}
+  }
+  function onMove(e) {
+    if (!e.isPrimary || !pointerDown) return;
+    if (state === "wind") {
+      const c = topScreenCenter();
+      const a = Math.atan2(e.clientY - c.y, e.clientX - c.x);
+      if (lastAngle !== null) {
+        let d = a - lastAngle;
+        if (d > Math.PI) d -= 2 * Math.PI; if (d < -Math.PI) d += 2 * Math.PI;
+        windAngle += Math.abs(d);
+        if (!windStart) windStart = performance.now();
+        const nw = Math.min(MAX_WRAPS, Math.floor(windAngle / (2 * Math.PI)));
+        if (nw !== wraps) { wraps = nw; el.wraps.textContent = wraps; setRings(wraps); blip(300 + wraps * 25); }
+      }
+      lastAngle = a;
+    } else if (state === "launch") {
+      samples.push({ x: e.clientX, y: e.clientY, t: performance.now() });
+      if (samples.length > 12) samples.shift();
+    }
+  }
+  function onUp(e) {
+    pointerDown = false;
+    if (state === "launch" && samples.length > 1) {
+      const last = samples[samples.length - 1];
+      let first = samples[0];
+      for (let i = samples.length - 1; i >= 0; i--) { if (last.t - samples[i].t <= 120) first = samples[i]; else break; }
+      const dt = Math.max(1, last.t - first.t);
+      const dx = last.x - first.x, dy = last.y - first.y;
+      const speed = Math.hypot(dx, dy) / dt;
+      if (speed < 0.35 || Math.hypot(dx, dy) < 30) { setHud("Fase 2 — Lançar", "Muito devagar. Arraste rápido para baixo e solte!"); blip(220); return; }
+      const ang = Math.atan2(dy, Math.abs(dx)) * 180 / Math.PI;
+      const angleFactor = dy <= 0 ? 0.45 : ang >= 25 && ang <= 80 ? 1 : 0.7;
+      doLaunch(speed, angleFactor);
+    }
+  }
+
+
+  // mantém o pião sempre em cima do chão: acha o ponto mais baixo do corpo
+  // para a inclinação atual e ergue o grupo se ele estiver abaixo de y=0
+  function settleOnGround() {
+    _tmpQ.setFromEuler(topGroup.rotation);
+    let minY = Infinity;
+    for (let i = 0; i < bodySamples.length; i++) {
+      _tmpV.copy(bodySamples[i]).applyQuaternion(_tmpQ);
+      if (_tmpV.y < minY) minY = _tmpV.y;
+    }
+    if (minY < 0) topGroup.position.y = -minY;
+    else if (topGroup.position.y < 0) topGroup.position.y = 0;
+  }
+
+  // ---------- loop ----------
+  function loop() {
+    if (!active) return;
+    raf = requestAnimationFrame(loop);
+    const dt = Math.min(0.05, clock.getDelta());
+    const now = performance.now();
+
+    if (state === "tutorial") {
+      topGroup.rotation.z = 0.95 + Math.sin(now / 400) * 0.04;
+      if (tutStep === 1) { tutTimer += dt; setRings(Math.min(12, Math.floor(tutTimer * 3))); if (tutTimer > 6) tutTimer = 0; }
+      if (ropeTail.visible) ropeTail.userData.knot.position.y = 3.6 + Math.sin(now / 300) * 0.05;
+    } else if (state === "wind") {
+      if (windStart) {
+        const left = WIND_SECONDS - (now - windStart) / 1000;
+        el.bar.style.width = Math.max(0, Math.min(100, (1 - left / WIND_SECONDS) * 100)) + "%";
+        if (left <= 0) startLaunch();
+      }
+      topGroup.rotation.z = 0.95 + Math.sin(now / 250) * 0.03;
+    } else if (state === "launching" && launchAnim) {
+      launchAnim.t += dt / 0.5;
+      const k = Math.min(1, launchAnim.t), e = 1 - Math.pow(1 - k, 3);
+      topGroup.position.set(launchAnim.from.x * (1 - e), launchAnim.from.y * (1 - e) + Math.sin(e * Math.PI) * 0.4, 0);
+      topGroup.rotation.z = launchAnim.rz * (1 - e);
+      spinGroup.rotation.y += dt * 30 * e;
+      setRings(Math.round(wraps * (1 - e)));
+      if (k >= 1) { state = "spin"; spinStart = now; spinT = 0; precession = 0; setRings(0); }
+    } else if (state === "spin") {
+      spinT = (now - spinStart) / 1000;
+      const p = Math.min(1, spinT / spinDuration);
+      const speed = 34 * (1 - p * 0.85);
+      spinGroup.rotation.y += dt * speed;
+      const wob = Math.pow(p, 2.2) * 0.42;
+      precession += dt * (2.2 + p * 5);
+      topGroup.rotation.z = Math.cos(precession) * wob;
+      topGroup.rotation.x = Math.sin(precession) * wob;
+      topGroup.position.set(Math.sin(precession * 0.37) * p * 0.25, 0, Math.cos(precession * 0.29) * p * 0.25);
+      settleOnGround();
+      el.time.textContent = fmt(spinT);
+      if (p >= 1) { state = "fall"; fallT = 0; }
+    } else if (state === "fall") {
+      fallT += dt;
+      const k = Math.min(1, fallT / 0.7), e = k * k;
+      const tilt = 0.42 + e * 1.0;
+      topGroup.rotation.z = Math.cos(precession) * tilt;
+      topGroup.rotation.x = Math.sin(precession) * tilt;
+      topGroup.position.y = 0;
+      settleOnGround();
+      spinGroup.rotation.y += dt * 5 * (1 - e);
+      if (k >= 1) finish(spinT);
+    }
+
+    if (state === "done") settleOnGround();
+    const hgt = topGroup.position.y;
+    shadow.position.x = topGroup.position.x; shadow.position.z = topGroup.position.z;
+    const sh = 1 - Math.min(0.7, hgt * 0.4);
+    shadow.scale.set(sh, sh, 1); shadow.material.opacity = 0.45 * sh;
+    renderer.render(scene, camera);
+  }
+
+  function open() {
+    if (!built) build();
+    el.root.classList.add("open");
+    cubePaused = true; active = true;
+    resize(); reset(); renderRank();
+    el.rank.classList.remove("show");
+    clock.getDelta();
+    loop();
+  }
+  function close() {
+    active = false; cancelAnimationFrame(raf);
+    el.root.classList.remove("open");
+    cubePaused = false;
+  }
+  el.start.addEventListener("click", () => { if (state === "idle" && !store.get("cartucho_piao_tut", 0)) startTutorial(); else startWind(); });
+  el.launchBtn.addEventListener("click", () => { if (state === "wind") startLaunch(); });
+  el.back.addEventListener("click", close);
+  el.rankBtn.addEventListener("click", () => el.rank.classList.toggle("show"));
+  return { open, close };
+})();
 </script>
 </body>
 </html>

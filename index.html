@@ -205,15 +205,15 @@ const cubeGroup = new THREE.Group();
 cubeRoot.add(cubeGroup);
 
 const COL = {
-  white: 0xf3f3f0, yellow: 0xffd400, red: 0xd41f1f,
-  orange: 0xff7a00, blue: 0x1a58d6, green: 0x00a050,
+  white: 0xf4f4f1, yellow: 0xffd500, red: 0xc8161d,
+  orange: 0xf25c05, blue: 0x0b4bc2, green: 0x009b48,
 };
 const SPACING = 1.06;
 const CUBIE = 0.98;
 const STICKER = 0.80;
 const STICKER_R = 0.13;
 
-const baseMat = new THREE.MeshStandardMaterial({ color: 0x0f1015, roughness: 0.45, metalness: 0.25 });
+const baseMat = new THREE.MeshStandardMaterial({ color: new THREE.Color(0x0f1015).convertSRGBToLinear(), roughness: 0.45, metalness: 0.25 });
 const cubieGeo = new THREE.BoxGeometry(CUBIE, CUBIE, CUBIE);
 
 function roundedRectShape(size, r) {
@@ -233,9 +233,10 @@ function roundedRectShape(size, r) {
 const stickerGeo = new THREE.ShapeGeometry(roundedRectShape(STICKER, STICKER_R), 8);
 const stickerMats = {};
 Object.keys(COL).forEach((k) => {
+  const c = new THREE.Color(COL[k]).convertSRGBToLinear();
   stickerMats[k] = new THREE.MeshStandardMaterial({
-    color: COL[k], roughness: 0.35, metalness: 0.0,
-    emissive: COL[k], emissiveIntensity: 0.16,
+    color: c, roughness: 0.35, metalness: 0.0,
+    emissive: c.clone(), emissiveIntensity: 0.14,
   });
 });
 

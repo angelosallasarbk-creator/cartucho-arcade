@@ -788,20 +788,19 @@ renderer.domElement.addEventListener("pointermove", (e) => {
     auraPulse = 1;
     rotateLayer(axisName, layer, sign * Math.PI / 2).then(() => {
       isAnimating = false;
-      if (isSolved()) {
+      if (scrambled && isSolved()) {
         timerStopped = true;
         const elapsed = performance.now() - timerStart;
         timeEl.textContent = fmt(elapsed);
-        let extra = "";
-        if (scrambled) {
-          Market.addCoins(5 * (N - 2), "por resolver o " + MODELS[modelIndex].name);
-          const pos = saveCubeResult(elapsed, moves);
-          scrambled = false;
-          extra = pos === 0 ? " Novo recorde do " + MODELS[modelIndex].name + "!" : pos > 0 && pos < 5 ? " " + (pos + 1) + "º lugar no ranking." : "";
-        }
+        Market.addCoins(5 * (N - 2), "por resolver o " + MODELS[modelIndex].name);
+        const pos = saveCubeResult(elapsed, moves);
+        scrambled = false;
+        const extra = pos === 0 ? " Novo recorde do " + MODELS[modelIndex].name + "!" : pos > 0 && pos < 5 ? " " + (pos + 1) + "º lugar no ranking." : "";
         setStatus("Resolvido em " + moves + " movimentos — " + timeEl.textContent + extra, true);
         blip(880); setTimeout(() => blip(1320), 120);
         auraPulse = 2.2;
+      } else if (!scrambled) {
+        setStatus("Clique em Embaralhar para valer ponto no ranking");
       } else {
         setStatus("Continue girando...");
       }
@@ -856,6 +855,7 @@ document.getElementById("scrambleBtn").addEventListener("click", async () => {
 document.getElementById("resetBtn").addEventListener("click", () => {
   if (isAnimating || !playable) return;
   buildCube();
+  scrambled = false;
   resetStats();
   auraPulse = 1.5;
   blip(660);

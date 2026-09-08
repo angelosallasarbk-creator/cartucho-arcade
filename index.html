@@ -149,6 +149,72 @@
     .rank { display: none; }
     .rank.show { display: block; position: fixed; left: 14px; right: 14px; width: auto; bottom: auto; top: 70px; }
   }
+
+  /* ---- seletor de modelo do cubo ---- */
+  .model {
+    position: fixed; z-index: 10; left: 50%; bottom: 32px; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 10px; pointer-events: none;
+  }
+  .model > * { pointer-events: auto; }
+  .model button.arrow {
+    width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line); background: rgba(11,13,31,0.7);
+    color: var(--ink); font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .model button.arrow:hover { border-color: var(--ink); }
+  .model button.arrow:focus-visible { outline: 2px solid var(--coin); outline-offset: 2px; }
+  .model .label { text-align: center; min-width: 170px; }
+  .model .label b { display: block; font-family: "Press Start 2P", monospace; font-size: 11px; font-weight: 400; color: var(--ink); margin-bottom: 6px; }
+  .model .label small { font-size: 12px; color: var(--ink-muted); }
+  .model .label i { color: var(--coin); font-style: normal; letter-spacing: 2px; }
+  .cube-rank { position: fixed; z-index: 10; right: 36px; bottom: 150px; width: 240px; background: rgba(11,13,31,0.8); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: none; }
+  .cube-rank.show { display: block; }
+  .cube-rank h3 { font-family: "Press Start 2P", monospace; font-size: 10px; font-weight: 400; margin: 0 0 10px; color: var(--coin); }
+  .cube-rank ol { margin: 0; padding: 0; list-style: none; font-size: 14px; }
+  .cube-rank li { display: flex; justify-content: space-between; gap: 8px; padding: 4px 0; border-top: 1px solid var(--line); }
+  .cube-rank li:first-child { border-top: 0; }
+  .cube-rank li span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cube-rank li.me { color: var(--coin); }
+  .cube-rank .empty { color: var(--ink-muted); font-size: 13px; }
+  .hud input { font-family: "Chakra Petch", sans-serif; background: rgba(11,13,31,0.6); border: 1px solid var(--line); color: var(--ink); border-radius: 8px; padding: 8px 10px; font-size: 14px; width: 130px; }
+  @media (max-width: 900px) {
+    .model { bottom: auto; top: calc(58px + env(safe-area-inset-top)); left: 50%; }
+    .model .label { min-width: 130px; }
+    .model .label b { font-size: 9px; }
+    .cube-rank { left: 16px; right: 16px; width: auto; bottom: auto; top: calc(120px + env(safe-area-inset-top)); }
+  }
+
+  /* ---- moedas + mercado ---- */
+  .coins { display: inline-flex; align-items: center; gap: 6px; font-family: "Press Start 2P", monospace; font-size: 10px; color: var(--coin); border: 1px solid rgba(255,212,0,0.35); border-radius: 999px; padding: 8px 12px; background: rgba(11,13,31,0.7); cursor: pointer; text-decoration: none; }
+  .coins.pop { animation: coinpop 500ms ease-out; }
+  @keyframes coinpop { 30% { transform: scale(1.12); } }
+  .head-right { display: flex; align-items: center; gap: 10px; }
+  .market { position: fixed; inset: 0; z-index: 35; display: none; align-items: center; justify-content: center; background: rgba(6,7,18,0.86); padding: 20px; }
+  .market.open { display: flex; }
+  .market-box { width: min(980px, 100%); max-height: 100%; overflow: auto; background: rgba(11,13,31,0.92); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+  .market-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+  .market-head h2 { font-family: "Press Start 2P", monospace; font-size: 14px; font-weight: 400; margin: 0; }
+  .market-head .right { display: flex; align-items: center; gap: 10px; }
+  .market-head button.close { background: none; border: 1px solid var(--line); color: var(--ink); border-radius: 999px; padding: 6px 14px; font-family: "Chakra Petch", sans-serif; font-size: 14px; cursor: pointer; }
+  .market .sub { color: var(--ink-muted); font-size: 14px; margin: 0 0 16px; line-height: 1.5; }
+  .market h3 { font-family: "Press Start 2P", monospace; font-size: 10px; font-weight: 400; color: var(--coin); margin: 18px 0 10px; }
+  .offer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
+  .skin { border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: rgba(6,7,18,0.5); display: flex; flex-direction: column; gap: 8px; }
+  .skin .mode { font-size: 12px; color: var(--ink-muted); }
+  .skin .swatch { height: 54px; border-radius: 8px; display: flex; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
+  .skin .swatch i { flex: 1; }
+  .skin b { font-size: 15px; font-weight: 600; }
+  .skin .rar { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+  .r-comum { color: #9aa3b5; } .r-raro { color: #4fb0ff; } .r-epico { color: #c77dff; } .r-lendario { color: var(--coin); }
+  .skin .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; }
+  .skin .price { font-family: "Press Start 2P", monospace; font-size: 10px; color: var(--coin); }
+  .skin button { font-family: "Chakra Petch", sans-serif; font-size: 13px; font-weight: 600; border-radius: 8px; padding: 8px 12px; cursor: pointer; border: 1px solid var(--line); background: transparent; color: var(--ink); }
+  .skin button.coin { background: var(--coin); color: var(--coin-ink); border-color: transparent; }
+  .skin button:disabled { opacity: 0.45; cursor: default; }
+  .skin.equipped { border-color: var(--coin); }
+  .countdown { font-family: "Press Start 2P", monospace; font-size: 9px; color: var(--ink-muted); }
+  .toast { position: fixed; z-index: 60; left: 50%; top: 70px; transform: translateX(-50%); background: rgba(11,13,31,0.92); border: 1px solid rgba(255,212,0,0.4); color: var(--coin); border-radius: 999px; padding: 8px 14px; font-family: "Press Start 2P", monospace; font-size: 9px; opacity: 0; pointer-events: none; transition: opacity 250ms; }
+  .toast.show { opacity: 1; }
+  @media (max-width: 900px) { .market-box { padding: 16px; } .offer-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); } }
 </style>
 </head>
 <body>
@@ -159,10 +225,14 @@
   <a class="logo" href="#">CAR<span>TU</span>CHO</a>
   <nav>
     <a href="#" id="navGames">Jogos</a>
+    <a href="#" id="navMarket">Mercado</a>
     <a href="#">Novidades</a>
     <a href="#">Ranking</a>
   </nav>
-  <a class="enter" href="#">Entrar</a>
+  <div class="head-right">
+    <button class="coins" type="button" id="coinsBtn" title="Abrir o Mercado">⬢ <span id="coinsVal">0</span> · Mercado</button>
+    <a class="enter" href="#">Entrar</a>
+  </div>
 </header>
 
 <section class="hero">
@@ -182,15 +252,23 @@
   </div>
   <div class="status" id="status">Montando o cubo...</div>
   <div class="buttons">
+    <input id="cubeName" maxlength="16" placeholder="Seu nome" aria-label="Seu nome">
     <button id="scrambleBtn" type="button">Embaralhar</button>
     <button id="resetBtn" type="button">Resetar</button>
+    <button id="cubeRankBtn" type="button">Ranking</button>
   </div>
 </div>
+<div class="model" aria-label="Escolher modelo de cubo">
+  <button class="arrow" type="button" id="modelPrev" aria-label="Modelo anterior">‹</button>
+  <div class="label"><b id="modelName">3×3 Clássico</b><small><i id="modelStars">★</i> <span id="modelDiff">Iniciante</span></small></div>
+  <button class="arrow" type="button" id="modelNext" aria-label="Próximo modelo">›</button>
+</div>
+<aside class="cube-rank" id="cubeRank"><h3 id="cubeRankTitle">Ranking 3×3</h3><ol id="cubeRankList"></ol></aside>
 
 
 <div class="games" id="games" role="dialog" aria-label="Escolha um jogo">
   <div class="games-box">
-    <div class="games-head"><h2>Escolha um cartucho</h2><button type="button" id="gamesClose">Fechar</button></div>
+    <div class="games-head"><h2>Escolha um cartucho</h2><span style="display:flex;gap:8px"><button type="button" id="gamesMarket">Mercado</button><button type="button" id="gamesClose">Fechar</button></span></div>
     <div class="cart-grid">
       <div class="cart"><span class="tag">Na tela</span><h3>Cubo mágico</h3><p>Gire as camadas e resolva o cubo contra o relógio.</p><button class="btn btn-ghost" type="button" id="gamesCube">Continuar</button></div>
       <div class="cart"><span class="tag">Novo</span><h3>Pião</h3><p>Enrole a corda o mais rápido que puder, lance com força e veja quanto tempo ele roda.</p><button class="btn btn-coin" type="button" id="gamesPiao">Jogar</button></div>
@@ -200,12 +278,30 @@
   </div>
 </div>
 
+<div class="market" id="market" role="dialog" aria-label="Mercado">
+  <div class="market-box">
+    <div class="market-head">
+      <h2>Mercado</h2>
+      <div class="right"><span class="coins" style="cursor:default">⬢ <span class="coinsVal2">0</span></span><button class="close" type="button" id="marketClose">Fechar</button></div>
+    </div>
+    <p class="sub">Você ganha 1 moeda a cada 10 segundos jogando de verdade, e bônus ao resolver um cubo ou lançar o pião. Todo dia o Mercado sorteia uma skin nova de cada modo. <span class="countdown" id="marketCountdown"></span></p>
+    <h3>Ofertas de hoje</h3>
+    <div class="offer-grid" id="offerGrid"></div>
+    <h3>Sua coleção</h3>
+    <div class="offer-grid" id="ownedGrid"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
 <section id="piao" aria-label="Pião">
   <div id="piao-scene"></div>
   <div class="piao-top">
     <button class="enter" type="button" id="piaoBack" style="background:rgba(11,13,31,0.7);cursor:pointer;font-family:inherit">← Voltar</button>
     <label class="name">Jogador <input id="piaoName" maxlength="16" placeholder="Seu nome"></label>
-    <button class="enter" type="button" id="piaoRankBtn" style="background:rgba(11,13,31,0.7);cursor:pointer;font-family:inherit">Ranking</button>
+    <span style="display:flex;gap:8px;align-items:center">
+      <button class="coins" type="button" id="piaoCoinsBtn">⬢ <span class="coinsVal2">0</span></button>
+      <button class="enter" type="button" id="piaoRankBtn" style="background:rgba(11,13,31,0.7);cursor:pointer;font-family:inherit">Ranking</button>
+    </span>
   </div>
   <div class="piao-hud">
     <p class="phase" id="piaoPhase">Pião</p>
@@ -347,20 +443,41 @@ const FACES = [
 let cubies = [];
 let pickables = [];
 
+const MODELS = [
+  { n: 3, name: "3×3 Clássico",  diff: "Iniciante",   stars: 1 },
+  { n: 4, name: "4×4 Revenge",   diff: "Médio",       stars: 2 },
+  { n: 5, name: "5×5 Professor", diff: "Difícil",     stars: 3 },
+  { n: 6, name: "6×6 Gigante",   diff: "Muito difícil", stars: 4 },
+  { n: 7, name: "7×7 Titã",      diff: "Lendário",    stars: 5 },
+];
+let modelIndex = 0;
+let N = 3;
+let OFF = 1;           // (N-1)/2 — deslocamento do índice para a posição
+let scrambled = false; // só entra no ranking se resolveu depois de embaralhar
+
 function buildCube() {
   cubeGroup.clear();
   cubies = [];
   pickables = [];
-  for (let ix = -1; ix <= 1; ix++) for (let iy = -1; iy <= 1; iy++) for (let iz = -1; iz <= 1; iz++) {
+  N = MODELS[modelIndex].n;
+  OFF = (N - 1) / 2;
+  scrambled = false;
+  for (let ix = 0; ix < N; ix++) for (let iy = 0; iy < N; iy++) for (let iz = 0; iz < N; iz++) {
+    const outer = ix === 0 || ix === N - 1 || iy === 0 || iy === N - 1 || iz === 0 || iz === N - 1;
+    if (!outer) continue; // peças internas não existem num cubo real
     const cubie = new THREE.Mesh(cubieGeo, baseMat);
-    cubie.position.set(ix * SPACING, iy * SPACING, iz * SPACING);
+    cubie.position.set((ix - OFF) * SPACING, (iy - OFF) * SPACING, (iz - OFF) * SPACING);
     cubie.userData.cubie = cubie;
+    const sx = ix === N - 1 ? 1 : ix === 0 ? -1 : 0;
+    const sy = iy === N - 1 ? 1 : iy === 0 ? -1 : 0;
+    const sz = iz === N - 1 ? 1 : iz === 0 ? -1 : 0;
     FACES.forEach((f) => {
-      if (!f.test(ix, iy, iz)) return;
+      if (!f.test(sx, sy, sz)) return;
       const st = new THREE.Mesh(stickerGeo, stickerMats[f.color]);
       st.rotation.set(...f.rot);
       st.position.set(...f.pos);
       st.userData.cubie = cubie;
+      st.userData.color = f.color;
       cubie.add(st);
       pickables.push(st);
     });
@@ -370,6 +487,7 @@ function buildCube() {
   }
 }
 buildCube();
+function layerIndexOf(cubie, axisName) { return Math.round(cubie.position[axisName] / SPACING + OFF); }
 
 // --- aura + stars ---
 function makeGlowTexture() {
@@ -415,7 +533,7 @@ function layout() {
   const desktop = width > 900;
   cubeRoot.position.x = desktop ? Math.min(2.4, width / 900 * 1.7) : 0;
   cubeRoot.position.y = desktop ? 0 : 1.6;
-  const s = desktop ? 1 : 0.72;
+  const s = (desktop ? 1 : 0.72) * (3 / N);
   cubeRoot.scale.set(s, s, s);
   aura.position.x = cubeRoot.position.x;
 }
@@ -430,9 +548,9 @@ function snapOrientation(obj) {
   const z = new THREE.Vector3(m[8], m[9], m[10]).round();
   const pos = new THREE.Vector3(m[12], m[13], m[14]);
   pos.set(
-    Math.round(pos.x / SPACING) * SPACING,
-    Math.round(pos.y / SPACING) * SPACING,
-    Math.round(pos.z / SPACING) * SPACING
+    (Math.round(pos.x / SPACING + OFF) - OFF) * SPACING,
+    (Math.round(pos.y / SPACING + OFF) - OFF) * SPACING,
+    (Math.round(pos.z / SPACING + OFF) - OFF) * SPACING
   );
   obj.matrix.makeBasis(x, y, z);
   obj.matrix.setPosition(pos);
@@ -467,7 +585,7 @@ const AXIS_VEC = { x: new THREE.Vector3(1, 0, 0), y: new THREE.Vector3(0, 1, 0),
 
 function rotateLayer(axisName, layerValue, angle, duration = 240) {
   return new Promise((resolve) => {
-    const selected = cubies.filter((c) => Math.round(c.position[axisName] / SPACING) === layerValue);
+    const selected = cubies.filter((c) => layerIndexOf(c, axisName) === layerValue);
     const pivot = new THREE.Object3D();
     cubeGroup.add(pivot);
     selected.forEach((c) => pivot.attach(c));
@@ -495,8 +613,18 @@ function rotateLayer(axisName, layerValue, angle, duration = 240) {
 }
 
 function isSolved() {
-  const q0 = cubies[0].quaternion;
-  return cubies.every((c) => Math.abs(Math.abs(c.quaternion.dot(q0)) - 1) < 1e-4);
+  const faceColor = {};
+  const n = new THREE.Vector3();
+  for (const c of cubies) {
+    for (const st of c.children) {
+      n.set(0, 0, 1).applyQuaternion(st.quaternion).applyQuaternion(c.quaternion);
+      const a = roundToAxis(n);
+      const key = (a.x ? "x" : a.y ? "y" : "z") + (a.x + a.y + a.z > 0 ? "+" : "-");
+      if (faceColor[key] === undefined) faceColor[key] = st.userData.color;
+      else if (faceColor[key] !== st.userData.color) return false;
+    }
+  }
+  return true;
 }
 
 // --- HUD state ---
@@ -517,6 +645,67 @@ function resetStats() {
   moves = 0; movesEl.textContent = "0";
   timerStart = null; timerStopped = true; timeEl.textContent = "00:00";
 }
+
+// --- ranking por modelo (salvo no navegador) ---
+const cubeStore = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (_) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} },
+};
+const cubeNameEl = document.getElementById("cubeName");
+cubeNameEl.value = cubeStore.get("cartucho_name", "");
+cubeNameEl.addEventListener("change", () => cubeStore.set("cartucho_name", cubeNameEl.value.trim()));
+function cubePlayerName() { return (cubeNameEl.value.trim() || "Jogador").slice(0, 16); }
+const cubeRankEl = document.getElementById("cubeRank");
+const cubeRankList = document.getElementById("cubeRankList");
+let lastCubeResult = null;
+function rankKey() { return "cartucho_cube_rank_" + N; }
+function renderCubeRank() {
+  let rank = cubeStore.get(rankKey(), []);
+  rank.sort((a, b) => a.time - b.time || a.moves - b.moves);
+  rank = rank.slice(0, 5);
+  cubeStore.set(rankKey(), rank);
+  document.getElementById("cubeRankTitle").textContent = "Ranking " + MODELS[modelIndex].name;
+  cubeRankList.innerHTML = "";
+  if (!rank.length) { cubeRankList.innerHTML = '<li class="empty">Ninguém resolveu este cubo ainda.</li>'; return; }
+  rank.forEach((r, i) => {
+    const li = document.createElement("li");
+    if (lastCubeResult && r.time === lastCubeResult.time && r.name === lastCubeResult.name) li.className = "me";
+    li.innerHTML = "<span>" + (i + 1) + ". " + String(r.name).replace(/[<>&]/g, "") + "</span><span>" + fmt(r.time) + " · " + r.moves + " mov.</span>";
+    cubeRankList.appendChild(li);
+  });
+}
+function saveCubeResult(timeMs, mv) {
+  const rank = cubeStore.get(rankKey(), []);
+  lastCubeResult = { name: cubePlayerName(), time: timeMs, moves: mv, date: Date.now() };
+  rank.push(lastCubeResult);
+  cubeStore.set(rankKey(), rank);
+  renderCubeRank();
+  const pos = cubeStore.get(rankKey(), []).findIndex((r) => r.time === lastCubeResult.time && r.name === lastCubeResult.name);
+  return pos;
+}
+document.getElementById("cubeRankBtn").addEventListener("click", () => { renderCubeRank(); cubeRankEl.classList.toggle("show"); });
+
+function updateModelLabel() {
+  const m = MODELS[modelIndex];
+  document.getElementById("modelName").textContent = m.name;
+  document.getElementById("modelDiff").textContent = m.diff;
+  document.getElementById("modelStars").textContent = "★".repeat(m.stars) + "☆".repeat(5 - m.stars);
+}
+function switchModel(dir) {
+  if (isAnimating || !playable) return;
+  modelIndex = (modelIndex + dir + MODELS.length) % MODELS.length;
+  buildCube();
+  layout();
+  resetStats();
+  updateModelLabel();
+  renderCubeRank();
+  auraPulse = 1.6;
+  blip(dir > 0 ? 720 : 560);
+  setStatus(MODELS[modelIndex].name + " montado. Embaralhe para valer ponto no ranking");
+}
+document.getElementById("modelPrev").addEventListener("click", () => switchModel(-1));
+document.getElementById("modelNext").addEventListener("click", () => switchModel(1));
+updateModelLabel();
 
 // --- pointer interaction ---
 const raycaster = new THREE.Raycaster();
@@ -589,7 +778,7 @@ renderer.domElement.addEventListener("pointermove", (e) => {
     const rotAxis = roundToAxis(normalL.clone().cross(tangent));
     const axisName = rotAxis.x ? "x" : rotAxis.y ? "y" : "z";
     const sign = rotAxis[axisName];
-    const layer = Math.round(twistCubie.position[axisName] / SPACING);
+    const layer = layerIndexOf(twistCubie, axisName);
 
     twistDone = true;
     isAnimating = true;
@@ -601,7 +790,16 @@ renderer.domElement.addEventListener("pointermove", (e) => {
       isAnimating = false;
       if (isSolved()) {
         timerStopped = true;
-        setStatus("Resolvido em " + moves + " movimentos — " + timeEl.textContent, true);
+        const elapsed = performance.now() - timerStart;
+        timeEl.textContent = fmt(elapsed);
+        let extra = "";
+        if (scrambled) {
+          Market.addCoins(5 * (N - 2), "por resolver o " + MODELS[modelIndex].name);
+          const pos = saveCubeResult(elapsed, moves);
+          scrambled = false;
+          extra = pos === 0 ? " Novo recorde do " + MODELS[modelIndex].name + "!" : pos > 0 && pos < 5 ? " " + (pos + 1) + "º lugar no ranking." : "";
+        }
+        setStatus("Resolvido em " + moves + " movimentos — " + timeEl.textContent + extra, true);
         blip(880); setTimeout(() => blip(1320), 120);
         auraPulse = 2.2;
       } else {
@@ -616,7 +814,7 @@ renderer.domElement.addEventListener("pointercancel", () => { dragMode = null; }
 // --- intro: appear scrambled, then solve itself ---
 const AXES = ["x", "y", "z"];
 function randomMove() {
-  return { axis: AXES[Math.floor(Math.random() * 3)], layer: Math.floor(Math.random() * 3) - 1, sign: Math.random() < 0.5 ? 1 : -1 };
+  return { axis: AXES[Math.floor(Math.random() * 3)], layer: Math.floor(Math.random() * N), sign: Math.random() < 0.5 ? 1 : -1 };
 }
 async function intro() {
   const seq = [];
@@ -643,14 +841,16 @@ document.getElementById("scrambleBtn").addEventListener("click", async () => {
   if (isAnimating || !playable) return;
   isAnimating = true;
   setStatus("Embaralhando...");
-  for (let i = 0; i < 20; i++) {
+  const count = 20 + (N - 3) * 10;
+  for (let i = 0; i < count; i++) {
     const m = randomMove();
     blip(300 + Math.random() * 200);
-    await rotateLayer(m.axis, m.layer, m.sign * Math.PI / 2, 110);
+    await rotateLayer(m.axis, m.layer, m.sign * Math.PI / 2, N > 4 ? 70 : 110);
   }
   isAnimating = false;
   resetStats();
-  setStatus("Embaralhado. Sua vez");
+  scrambled = true;
+  setStatus("Embaralhado. Sua vez — o tempo conta para o ranking");
 });
 
 document.getElementById("resetBtn").addEventListener("click", () => {
@@ -737,14 +937,23 @@ const Piao = (() => {
   let topGroup, spinGroup, ringsGroup, shadow, ringRadiusAt, ropeLoop, ropeTail, bodySamples = [];
   const _tmpV = new THREE.Vector3(), _tmpQ = new THREE.Quaternion();
   let tutStep = 0, tutTimer = 0;
+  let bodyMat = null, tipMat = null, currentSkin = null;
+  function applySkin(skin) {
+    currentSkin = skin;
+    if (!built) return;
+    if (bodyMat.map) bodyMat.map.dispose();
+    bodyMat.map = woodTexture(skin); bodyMat.needsUpdate = true;
+    tipMat.color.set(skin ? skin.tip : "#bfc4cc").convertSRGBToLinear();
+  }
+  function isPlaying() { return active && (state === "wind" || state === "launch" || state === "launching" || state === "spin"); }
   let state = "idle";
   let wraps = 0, windAngle = 0, windStart = 0, lastAngle = null, pointerDown = false;
   let samples = [];
   let spinStart = 0, spinDuration = 0, spinT = 0, precession = 0, fallT = 0, launchAnim = null;
   let rank = store.get("cartucho_piao_rank", []);
   let lastResult = null;
-  el.name.value = store.get("cartucho_piao_name", "");
-  el.name.addEventListener("change", () => store.set("cartucho_piao_name", el.name.value.trim()));
+  el.name.value = store.get("cartucho_name", "");
+  el.name.addEventListener("change", () => store.set("cartucho_name", el.name.value.trim()));
 
   function playerName() { return (el.name.value.trim() || "Jogador").slice(0, 16); }
   function fmt(sec) { return sec.toFixed(1).replace(".", ",") + " s"; }
@@ -765,18 +974,19 @@ const Piao = (() => {
     el.best.textContent = mine.length ? fmt(mine[0].time) : "—";
   }
 
-  function woodTexture() {
+  function woodTexture(skin) {
     const c = document.createElement("canvas");
     c.width = 128; c.height = 512;
     const g = c.getContext("2d");
     const grad = g.createLinearGradient(0, 0, 0, 512);
-    grad.addColorStop(0, "#e7a877"); grad.addColorStop(0.5, "#d98f5c"); grad.addColorStop(1, "#c77843");
+    const sk = skin || { body: ["#e7a877", "#d98f5c", "#c77843"], stripe: "#4a2a14", grain: "#8a4a22", cap: "#b86f3c" };
+    grad.addColorStop(0, sk.body[0]); grad.addColorStop(0.5, sk.body[1]); grad.addColorStop(1, sk.body[2]);
     g.fillStyle = grad; g.fillRect(0, 0, 128, 512);
-    g.globalAlpha = 0.18; g.fillStyle = "#8a4a22";
+    g.globalAlpha = 0.18; g.fillStyle = sk.grain;
     for (let i = 0; i < 60; i++) { const y = Math.random() * 512; g.fillRect(0, y, 128, 1 + Math.random() * 2); }
-    g.globalAlpha = 1; g.fillStyle = "#4a2a14";
+    g.globalAlpha = 1; g.fillStyle = sk.stripe;
     [0.19, 0.25, 0.31].forEach((v) => { const y = (1 - v) * 512; g.fillRect(0, y - 4, 128, 8); });
-    g.fillStyle = "#b86f3c"; g.fillRect(0, 0, 128, 14);
+    g.fillStyle = sk.cap; g.fillRect(0, 0, 128, 14);
     const t = new THREE.CanvasTexture(c);
     t.encoding = THREE.sRGBEncoding;
     return t;
@@ -870,8 +1080,10 @@ const Piao = (() => {
       }
       return 0.3;
     };
-    const body = new THREE.Mesh(new THREE.LatheGeometry(pts, 48), new THREE.MeshStandardMaterial({ map: woodTexture(), roughness: 0.55, metalness: 0.05 }));
-    const tip = new THREE.Mesh(new THREE.SphereGeometry(0.07, 16, 16), new THREE.MeshStandardMaterial({ color: 0xbfc4cc, metalness: 0.9, roughness: 0.25 }));
+    bodyMat = new THREE.MeshStandardMaterial({ map: woodTexture(currentSkin), roughness: 0.55, metalness: 0.05 });
+    tipMat = new THREE.MeshStandardMaterial({ color: new THREE.Color(currentSkin ? currentSkin.tip : "#bfc4cc").convertSRGBToLinear(), metalness: 0.9, roughness: 0.25 });
+    const body = new THREE.Mesh(new THREE.LatheGeometry(pts, 48), bodyMat);
+    const tip = new THREE.Mesh(new THREE.SphereGeometry(0.07, 16, 16), tipMat);
     tip.position.y = 0.03;
     topGroup = new THREE.Group(); spinGroup = new THREE.Group(); ringsGroup = new THREE.Group();
     spinGroup.add(body, tip, ringsGroup);
@@ -968,6 +1180,7 @@ const Piao = (() => {
     el.start.textContent = "Jogar de novo"; el.start.style.display = ""; el.how.style.display = "";
     if (w < 900) el.rank.classList.add("show");
     blip(pos === 0 ? 1320 : 660);
+    if (Piao.onFinish) Piao.onFinish(sec);
   }
 
 
@@ -1147,8 +1360,184 @@ const Piao = (() => {
   el.launchBtn.addEventListener("click", () => { if (state === "wind") startLaunch(); });
   el.back.addEventListener("click", close);
   el.rankBtn.addEventListener("click", () => el.rank.classList.toggle("show"));
-  return { open, close };
+  return { open, close, applySkin, isPlaying, onFinish: null };
 })();
+
+// =====================================================================
+//  Moedas + Mercado (skins diárias)
+// =====================================================================
+const Market = (() => {
+  const st = {
+    get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (_) { return d; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} },
+  };
+  const RAR = [
+    { id: "comum", label: "Comum", price: 40, w: 0.5 },
+    { id: "raro", label: "Raro", price: 90, w: 0.3 },
+    { id: "epico", label: "Épico", price: 160, w: 0.15 },
+    { id: "lendario", label: "Lendário", price: 300, w: 0.05 },
+  ];
+  const MODES = {
+    cubo:   { label: "Cubo mágico", playable: true },
+    piao:   { label: "Pião", playable: true },
+    gude:   { label: "Bolinha de gude", playable: false },
+    peteca: { label: "Peteca", playable: false },
+  };
+  const ADJ = ["Neon", "Lunar", "Solar", "Fantasma", "Carbono", "Coral", "Ártico", "Vulcânico", "Pixel", "Cromado", "Selvagem", "Cósmico", "Ouro Velho", "Turquesa", "Rubi", "Jade"];
+  const NOUN = { cubo: ["Prisma", "Matriz", "Bloco", "Enigma"], piao: ["Furacão", "Rodopio", "Ferrão", "Trovão"], gude: ["Olho de Gato", "Leiteira", "Galáxia", "Bolão"], peteca: ["Pluma", "Voo", "Rabiola", "Sopro"] };
+
+  // gerador determinístico: as mesmas 8 skins por modo, sempre
+  function hash(str) { let h = 2166136261; for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+  function rng(seed) { let a = seed >>> 0; return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  const hsl = (h, s, l) => "hsl(" + Math.round(((h % 360) + 360) % 360) + "," + Math.round(s) + "%," + Math.round(l) + "%)";
+  function makeSkin(mode, i) {
+    const r = rng(hash("cartucho:" + mode + ":" + i));
+    const x = r();
+    let acc = 0, rar = RAR[0];
+    for (const R of RAR) { acc += R.w; if (x <= acc) { rar = R; break; } }
+    const hue = Math.floor(r() * 360);
+    const name = ADJ[Math.floor(r() * ADJ.length)] + " " + NOUN[mode][Math.floor(r() * NOUN[mode].length)];
+    const sk = { id: mode + "-" + i, mode, name, rarity: rar.id, rarityLabel: rar.label, price: rar.price };
+    if (mode === "cubo") {
+      const sat = 70 + r() * 25, lig = 48 + r() * 10, spread = 40 + r() * 25;
+      sk.colors = [0, 1, 2, 3, 4, 5].map((k) => hsl(hue + k * spread, sat, lig));
+      sk.base = r() < 0.5 ? "#0f1015" : hsl(hue, 20, 12);
+      sk.swatch = sk.colors;
+    } else if (mode === "piao") {
+      const sat = 45 + r() * 45;
+      sk.body = [hsl(hue, sat, 66), hsl(hue, sat, 54), hsl(hue, sat, 44)];
+      sk.stripe = hsl(hue + 180, 40, 18); sk.grain = hsl(hue, sat, 30); sk.cap = hsl(hue + 20, sat, 40);
+      sk.tip = r() < 0.5 ? "#bfc4cc" : hsl(hue + 180, 60, 60);
+      sk.swatch = [sk.body[0], sk.body[1], sk.body[2], sk.stripe, sk.tip];
+    } else {
+      sk.swatch = [0, 1, 2, 3].map((k) => hsl(hue + k * 30, 60 + r() * 30, 40 + r() * 30));
+    }
+    return sk;
+  }
+  const CATALOG = {};
+  Object.keys(MODES).forEach((m) => { CATALOG[m] = []; for (let i = 0; i < 8; i++) CATALOG[m].push(makeSkin(m, i)); });
+  function find(id) { for (const m in CATALOG) { const f = CATALOG[m].find((s) => s.id === id); if (f) return f; } return null; }
+
+  // estado do jogador
+  let coins = st.get("cartucho_coins", 0);
+  let owned = st.get("cartucho_owned", []);
+  let equipped = st.get("cartucho_equipped", {});
+  const el = {
+    market: document.getElementById("market"), offers: document.getElementById("offerGrid"), owned: document.getElementById("ownedGrid"),
+    countdown: document.getElementById("marketCountdown"), toast: document.getElementById("toast"),
+  };
+  function save() { st.set("cartucho_coins", coins); st.set("cartucho_owned", owned); st.set("cartucho_equipped", equipped); }
+  function renderCoins(pop) {
+    document.getElementById("coinsVal").textContent = coins;
+    document.querySelectorAll(".coinsVal2").forEach((e) => e.textContent = coins);
+    if (pop) { const b = document.getElementById("coinsBtn"); b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop"); }
+  }
+  let toastT = 0;
+  function toast(msg) {
+    el.toast.textContent = msg; el.toast.classList.add("show");
+    clearTimeout(toastT); toastT = setTimeout(() => el.toast.classList.remove("show"), 1800);
+  }
+  function addCoins(n, why) {
+    coins += n; save(); renderCoins(true);
+    if (why) toast("+" + n + " ⬢ " + why);
+  }
+
+  // ofertas do dia: uma skin por modo, sorteada pelo dia; evita repetir o que já tem
+  function dayIndex() { return Math.floor(Date.now() / 86400000); }
+  function todaysOffers() {
+    const d = dayIndex();
+    return Object.keys(MODES).map((m) => {
+      const pool = CATALOG[m].filter((s) => !owned.includes(s.id));
+      const list = pool.length ? pool : CATALOG[m];
+      const r = rng(hash("offer:" + m + ":" + d));
+      return list[Math.floor(r() * list.length)];
+    });
+  }
+  function untilTomorrow() {
+    const ms = (dayIndex() + 1) * 86400000 - Date.now();
+    const h = Math.floor(ms / 3600000), mi = Math.floor(ms % 3600000 / 60000), se = Math.floor(ms % 60000 / 1000);
+    return String(h).padStart(2, "0") + ":" + String(mi).padStart(2, "0") + ":" + String(se).padStart(2, "0");
+  }
+
+  function card(sk, ctx) {
+    const isOwned = owned.includes(sk.id), isEq = equipped[sk.mode] === sk.id;
+    const div = document.createElement("div");
+    div.className = "skin" + (isEq ? " equipped" : "");
+    div.innerHTML = '<span class="mode">' + MODES[sk.mode].label + '</span>' +
+      '<div class="swatch">' + sk.swatch.map((c) => '<i style="background:' + c + '"></i>').join("") + '</div>' +
+      '<b>' + sk.name + '</b><span class="rar r-' + sk.rarity + '">' + sk.rarityLabel + '</span>' +
+      '<div class="row"></div>';
+    const row = div.querySelector(".row");
+    if (!isOwned) {
+      row.innerHTML = '<span class="price">⬢ ' + sk.price + '</span>';
+      const b = document.createElement("button"); b.className = "coin"; b.type = "button";
+      b.textContent = coins >= sk.price ? "Comprar" : "Faltam " + (sk.price - coins);
+      b.disabled = coins < sk.price;
+      b.addEventListener("click", () => buy(sk));
+      row.appendChild(b);
+    } else {
+      row.innerHTML = '<span class="price">' + (isEq ? "Equipada" : "Sua") + '</span>';
+      const b = document.createElement("button"); b.type = "button";
+      if (!MODES[sk.mode].playable) { b.textContent = "Em breve"; b.disabled = true; }
+      else { b.textContent = isEq ? "Remover" : "Equipar"; b.addEventListener("click", () => equip(sk, !isEq)); }
+      row.appendChild(b);
+    }
+    return div;
+  }
+  function render() {
+    renderCoins(false);
+    el.offers.innerHTML = ""; todaysOffers().forEach((sk) => el.offers.appendChild(card(sk, "offer")));
+    el.owned.innerHTML = "";
+    if (!owned.length) el.owned.innerHTML = '<p class="sub" style="margin:0">Você ainda não tem skins. Jogue para ganhar moedas e volte aqui.</p>';
+    owned.map(find).filter(Boolean).forEach((sk) => el.owned.appendChild(card(sk, "owned")));
+    el.countdown.textContent = "Novas ofertas em " + untilTomorrow();
+  }
+  function buy(sk) {
+    if (coins < sk.price || owned.includes(sk.id)) return;
+    coins -= sk.price; owned.push(sk.id); save(); renderCoins(true);
+    blip(900); setTimeout(() => blip(1200), 100);
+    toast("Comprou " + sk.name);
+    if (MODES[sk.mode].playable) equip(sk, true); else render();
+  }
+  function equip(sk, on) {
+    if (on) equipped[sk.mode] = sk.id; else delete equipped[sk.mode];
+    save(); applyEquipped(); render();
+  }
+  function applyEquipped() {
+    const c = equipped.cubo ? find(equipped.cubo) : null;
+    const keys = ["white", "yellow", "red", "orange", "blue", "green"];
+    keys.forEach((k, i) => {
+      const hex = c ? c.colors[i] : null;
+      const col = hex ? new THREE.Color(hex) : new THREE.Color(COL[k]);
+      col.convertSRGBToLinear();
+      stickerMats[k].color.copy(col); stickerMats[k].emissive.copy(col);
+    });
+    baseMat.color.set(c ? c.base : "#0f1015").convertSRGBToLinear();
+    Piao.applySkin(equipped.piao ? find(equipped.piao) : null);
+  }
+
+  // moedas por tempo de jogo ativo
+  let activeSec = 0;
+  setInterval(() => {
+    if (document.hidden) return;
+    const cubeActive = playable && !cubePaused && (performance.now() - lastInteraction < 15000);
+    if (cubeActive || Piao.isPlaying()) {
+      activeSec++;
+      if (activeSec % 10 === 0) addCoins(1, null);
+    }
+  }, 1000);
+  setInterval(() => { if (el.market.classList.contains("open")) el.countdown.textContent = "Novas ofertas em " + untilTomorrow(); }, 1000);
+
+  function open() { render(); el.market.classList.add("open"); }
+  function close() { el.market.classList.remove("open"); }
+  ["coinsBtn", "navMarket", "gamesMarket", "piaoCoinsBtn"].forEach((id) => document.getElementById(id).addEventListener("click", (e) => { e.preventDefault(); closeGames(); open(); }));
+  document.getElementById("marketClose").addEventListener("click", close);
+  applyEquipped(); renderCoins(false);
+  return { open, close, addCoins, applyEquipped };
+})();
+
+// bônus de moedas ao completar
+Piao.onFinish = (sec) => Market.addCoins(2 + Math.floor(sec / 5), "pelo pião");
 </script>
 </body>
 </html>
